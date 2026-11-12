@@ -25,6 +25,25 @@ celdas 192x208, 1536x1872 px):
 
 Alternativa: OpenPets (https://github.com/OpenPetsHQ/openpets) también lee `~/.codex/pets/`.
 
+## OpenPets (paquete completo con Idle Activities)
+
+`openpets/<id>/` es el paquete completo para OpenPets: el mismo atlas más `activities/*.webp` y un
+`pet.json` que las declara. No lo copies a `~/.petdex` ni a `~/.codex`: ahí va el `pets/<id>/` básico.
+Con la app de OpenPets abierta, instálalo así:
+
+- `npx @open-pets/cli install --from-folder openpets/<id>`, o
+- descarga `<id>-completo.zip` de la última Release e impórtalo en Control Center → Pets → Import pet.
+
+Regenerar y comprobar (necesita `pillow numpy scipy`):
+
+```sh
+.venv/bin/python tools/openpets.py actividades   # tiras de actividades + openpets/<id>/pet.json
+.venv/bin/python tools/openpets.py zip           # dist/<id>.zip (básico) y dist/<id>-completo.zip
+.venv/bin/python tools/openpets.py validar       # reglas de OpenPets: pet.json, actividades y ZIP
+```
+
+Los ZIP de `dist/` no se suben al repo: van como adjuntos de una GitHub Release.
+
 ## Desinstalar
 
 `./install.sh --desinstalar` (todas) o `./install.sh --desinstalar <id>`.

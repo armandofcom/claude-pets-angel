@@ -1,0 +1,32 @@
+{
+  "id": "guante-verde",
+  "displayName": "Guante Verde",
+  "description": "El guante verde de Ángel Gaitán: pulgar arriba cuando todo sale bien y pulgar abajo cuando algo falla.",
+  "spritesheetPath": "spritesheet.webp",
+  "activities": [
+    {
+      "id": "saltitos",
+      "displayName": "Saltitos",
+      "outfitId": "default",
+      "spritesheetPath": "activities/saltitos.webp",
+      "frameCount": 16,
+      "fps": 8
+    },
+    {
+      "id": "baile",
+      "displayName": "Baile",
+      "outfitId": "default",
+      "spritesheetPath": "activities/baile.webp",
+      "frameCount": 12,
+      "fps": 10
+    },
+    {
+      "id": "voltereta",
+      "displayName": "Voltereta",
+      "outfitId": "default",
+      "spritesheetPath": "activities/voltereta.webp",
+      "frameCount": 12,
+      "fps": 12
+    }
+  ]
+}

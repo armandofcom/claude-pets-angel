@@ -72,6 +72,38 @@ foreach ($dest in "$env:USERPROFILE\.petdex\pets", "$env:USERPROFILE\.codex\pets
 3. En **Pets** elige **Ángel Gaitán** o **Guante Verde**.
 4. En **Agents** conecta **Claude Code** (o Codex, Cursor…).
 
+### En OpenPets (con animaciones extra)
+
+[OpenPets](https://openpets.dev) reproduce además **Idle Activities**: animaciones extra que la mascota
+hace por su cuenta de vez en cuando mientras está en reposo.
+
+| Ángel Gaitán | | | | |
+| :---: | :---: | :---: | :---: | :---: |
+| ![Pasear](preview/angel-gaitan/actividad-pasear.gif) | ![Trotar](preview/angel-gaitan/actividad-trotar.gif) | ![Pulgar arriba](preview/angel-gaitan/actividad-pulgar-arriba.gif) | ![Pensar](preview/angel-gaitan/actividad-pensar.gif) | ![Preguntar](preview/angel-gaitan/actividad-preguntar.gif) |
+| Pasear de lado a lado | Trotar | Pulgar arriba | Pensar | Preguntar |
+
+| Guante Verde | | |
+| :---: | :---: | :---: |
+| ![Saltitos](preview/guante-verde/actividad-saltitos.gif) | ![Baile](preview/guante-verde/actividad-baile.gif) | ![Voltereta](preview/guante-verde/actividad-voltereta.gif) |
+| Saltitos de lado a lado | Baile | Voltereta |
+
+Tres formas de instalarlas, con la app de OpenPets abierta:
+
+1. **Enlace directo:** pega esto en la barra del navegador y acepta el aviso de OpenPets.
+
+   ```text
+   openpets://install?url=https%3A%2F%2Fgithub.com%2Farmandofcom%2Fclaude-pets-angel%2Freleases%2Flatest%2Fdownload%2Fangel-gaitan-completo.zip&name=%C3%81ngel%20Gait%C3%A1n
+   openpets://install?url=https%3A%2F%2Fgithub.com%2Farmandofcom%2Fclaude-pets-angel%2Freleases%2Flatest%2Fdownload%2Fguante-verde-completo.zip&name=Guante%20Verde
+   ```
+
+2. **Importar el ZIP:** descarga `angel-gaitan-completo.zip` o `guante-verde-completo.zip` de
+   [Releases](https://github.com/armandofcom/claude-pets-angel/releases/latest) y ábrelo en
+   **Control Center → Pets → Import pet → ZIP**.
+3. **Desde la terminal:** `npx @open-pets/cli install --from-zip angel-gaitan-completo.zip`.
+
+Los ZIP sin `-completo` son el paquete básico (solo `pet.json` + `spritesheet.webp`), el formato que
+exige el catálogo de openpets.dev y que también sirve en Codex y Petdex.
+
 ## Cómo reacciona
 
 | Estado | Cuándo sale | Ángel Gaitán | Guante Verde |

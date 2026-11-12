@@ -1,0 +1,48 @@
+{
+  "id": "angel-gaitan",
+  "displayName": "Ángel Gaitán",
+  "description": "Ángel, el mecánico de TikTok, con sus guantes verdes: saluda, salta con el pulgar arriba y se lleva la mano a la cara si algo falla.",
+  "spritesheetPath": "spritesheet.webp",
+  "activities": [
+    {
+      "id": "pasear",
+      "displayName": "Pasear",
+      "outfitId": "default",
+      "spritesheetPath": "activities/pasear.webp",
+      "frameCount": 16,
+      "fps": 8
+    },
+    {
+      "id": "trotar",
+      "displayName": "Trotar",
+      "outfitId": "default",
+      "spritesheetPath": "activities/trotar.webp",
+      "frameCount": 16,
+      "fps": 10
+    },
+    {
+      "id": "pulgar-arriba",
+      "displayName": "Pulgar arriba",
+      "outfitId": "default",
+      "spritesheetPath": "activities/pulgar-arriba.webp",
+      "frameCount": 5,
+      "fps": 5
+    },
+    {
+      "id": "pensar",
+      "displayName": "Pensar",
+      "outfitId": "default",
+      "spritesheetPath": "activities/pensar.webp",
+      "frameCount": 10,
+      "fps": 5
+    },
+    {
+      "id": "preguntar",
+      "displayName": "Preguntar",
+      "outfitId": "default",
+      "spritesheetPath": "activities/preguntar.webp",
+      "frameCount": 6,
+      "fps": 4
+    }
+  ]
+}
