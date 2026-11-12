@@ -2,11 +2,6 @@ MIT License
 
 Copyright (c) 2026 Armando Felipe Fuentes Denis
 
-This license applies only to the source code in this repository (the `tools/`
-directory and `install.sh`). It does NOT apply to the artwork in `pets/`,
-`preview/`, `fuentes/` or `tools/guante-verde-logo.webp`: the green glove logo
-and the avatar belong to Ángel Gaitán, all rights reserved.
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights

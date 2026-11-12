@@ -1,0 +1,9 @@
+Artwork notice
+=============
+
+The MIT license in LICENSE covers only the source code (tools/ and install.sh).
+
+The artwork in pets/, preview/, fuentes/ and tools/guante-verde-logo.webp is NOT
+licensed under MIT: the green glove logo and the avatar belong to Ángel Gaitán.
+All rights reserved. You may install and use the pets, but not modify,
+redistribute or reuse the artwork elsewhere without permission.
