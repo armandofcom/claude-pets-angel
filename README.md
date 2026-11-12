@@ -122,8 +122,8 @@ CLAUDE.md         instrucciones para que Claude Code las instale
 
 - **Código** (`tools/`, `install.sh`): [MIT](LICENSE).
 - **Arte** (`pets/`, `preview/`, `fuentes/` y el logo): el guante verde es la marca de Ángel Gaitán y el
-  avatar reproduce su imagen. Todos los derechos reservados. Puedes instalarlas y usarlas, pero no
-  modificarlas, redistribuirlas ni usarlas en otros proyectos sin permiso.
+  avatar reproduce su imagen. Todos los derechos reservados ([NOTICE](NOTICE)). Puedes instalarlas y
+  usarlas, pero no modificarlas, redistribuirlas ni usarlas en otros proyectos sin permiso.
 - El formato de mascota y la app son de [Petdex](https://github.com/crafter-station/petdex) y
   [OpenPets](https://github.com/OpenPetsHQ/openpets).
 
