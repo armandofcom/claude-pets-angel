@@ -1,32 +1,32 @@
-# Guante Verde · mascota de escritorio
+# Mascotas de Ángel Gaitán
 
-El guante verde de Ángel Gaitán convertido en mascota animada para
-[Petdex Desktop](https://petdex.dev), Codex y [OpenPets](https://github.com/OpenPetsHQ/openpets).
-Reacciona a lo que hace Claude Code: salta con el pulgar arriba cuando algo sale bien y
-gira a pulgar abajo cuando algo falla.
+Dos mascotas animadas de escritorio para [Petdex Desktop](https://petdex.dev), Codex y
+[OpenPets](https://github.com/OpenPetsHQ/openpets). Reaccionan a lo que hace Claude Code.
+Instala una o las dos y elige cuál ver en Petdex.
 
-![Hoja de animaciones](preview/contact-sheet.png)
-
-| Reposo | Éxito | Error | Trabajando |
-| --- | --- | --- | --- |
-| ![idle](preview/idle.gif) | ![jumping](preview/jumping.gif) | ![failed](preview/failed.gif) | ![running](preview/running.gif) |
+| Guante Verde | Ángel Gaitán |
+| --- | --- |
+| ![Guante Verde](preview/guante-verde/idle.gif) | ![Ángel Gaitán](preview/angel-gaitan/idle.gif) |
+| El logo del guante. Salta con el pulgar arriba y gira a pulgar abajo si algo falla. | Avatar de Ángel con sus guantes verdes. Saluda, salta con el pulgar arriba y se lleva la mano a la cara si algo falla. |
 
 ## Instalar
 
 ```sh
 gh repo clone armandofcom/claude-pets-angel
 cd claude-pets-angel
-./install.sh
+./install.sh                  # las dos
+./install.sh angel-gaitan     # solo el avatar
+./install.sh guante-verde     # solo el guante
 ```
 
 Después:
 
 1. Descarga [Petdex Desktop](https://petdex.dev/download) y ábrelo.
 2. Pon el ratón sobre la mascota y pulsa <kbd>Cmd</kbd>+<kbd>,</kbd>.
-3. En **Pets** elige **Guante Verde**.
+3. En **Pets** elige **Guante Verde** o **Ángel Gaitán**.
 4. En **Agents** conecta **Claude Code**.
 
-Para quitarla: `./install.sh --desinstalar`.
+Para quitarlas: `./install.sh --desinstalar` (todas) o `./install.sh --desinstalar angel-gaitan`.
 
 ### Con Claude Code
 
@@ -36,28 +36,33 @@ Abre Claude Code en cualquier carpeta y pídele:
 
 Claude clonará el repo, ejecutará `install.sh` y te dirá el paso final en Petdex Desktop.
 
-## Qué hace cada animación
+## Animaciones
 
-| Fila | Estado | Cuándo sale | Movimiento |
+| Estado | Cuándo sale | Guante Verde | Ángel Gaitán |
 | --- | --- | --- | --- |
-| 0 | idle | Sin actividad | Respira y se balancea |
-| 1 | running-right | Arrastras la mascota a la derecha | Saltitos inclinado a la derecha |
-| 2 | running-left | Arrastras la mascota a la izquierda | Saltitos inclinado a la izquierda |
-| 3 | waving | Saludo o aviso | Se mece de lado a lado |
-| 4 | jumping | Tarea terminada bien | Se agacha y salta |
-| 5 | failed | Algo falló | Gira a pulgar abajo y pierde color |
-| 6 | waiting | Claude espera tu permiso | Da toquecitos hacia delante |
-| 7 | running | Claude ejecuta o edita | Vibra con energía |
-| 8 | review | Claude piensa o revisa | Se inclina despacio |
+| idle | Sin actividad | Respira y se balancea | Brazos cruzados, respira y parpadea |
+| running-right / left | Arrastras la mascota | Saltitos inclinado | Trota hacia ese lado |
+| waving | Saludo o aviso | Se mece | Saluda con el guante |
+| jumping | Tarea terminada bien | Salta | Salta con el pulgar arriba |
+| failed | Algo falló | Gira a pulgar abajo y pierde color | Se lleva la mano a la cara |
+| waiting | Claude espera tu permiso | Toquecitos hacia delante | Mano abierta, «¿te toca?» |
+| running | Claude ejecuta o edita | Vibra con energía | Se ajusta los guantes y flexiona los dedos |
+| review | Claude piensa o revisa | Se inclina despacio | Mano en la barbilla |
 
-## Formato
+Hojas completas: [guante](preview/guante-verde/contact-sheet.png) · [Ángel](preview/angel-gaitan/contact-sheet.png).
 
-- `pets/guante-verde/pet.json` y `pets/guante-verde/spritesheet.webp`.
-- Atlas 8x9 de celdas 192x208 (1536x1872 px), el formato de Codex que también aceptan Petdex y OpenPets.
-- Validado con `validate_atlas.py` de la skill `hatch-pet` de Codex: sin errores ni avisos.
-- `tools/generar_atlas.py` regenera el atlas desde el logo (`tools/guante-verde-logo.webp`).
+## Formato y cómo se hicieron
+
+- Cada mascota es `pets/<id>/pet.json` + `pets/<id>/spritesheet.webp`: atlas 8x9 de celdas 192x208
+  (1536x1872 px), el formato de Codex que también aceptan Petdex y OpenPets.
+- Las dos pasan `validate_atlas.py` de la skill `hatch-pet` de Codex sin errores ni avisos.
+- **Guante Verde:** `tools/generar_atlas.py` anima el logo real (`tools/guante-verde-logo.webp`).
+- **Ángel Gaitán:** ilustración generada con IA en Higgsfield (GPT Image 2) a partir de fotos públicas
+  de su web e Instagram. Las tiras originales están en `fuentes/angel-gaitan/` y
+  `tools/procesar_tiras.py` las recorta, iguala tamaño y suelo, y monta el atlas.
 
 ## Derechos
 
-El guante verde es el logo de Ángel Gaitán. El arte no se puede redistribuir ni subir a galerías
-públicas sin su permiso. El script de `tools/` se puede reutilizar libremente.
+El guante verde es el logo de Ángel Gaitán y el avatar reproduce su imagen. No se pueden
+redistribuir ni subir a galerías públicas (por ejemplo `petdex submit`) sin su permiso.
+Los scripts de `tools/` se pueden reutilizar libremente.
