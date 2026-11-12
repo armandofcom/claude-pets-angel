@@ -19,6 +19,7 @@ import math
 from dataclasses import dataclass
 from pathlib import Path
 
+from bocadillo import Bubble, draw_bubble
 from PIL import Image, ImageDraw, ImageEnhance
 
 CELL_W, CELL_H = 192, 208
@@ -94,8 +95,12 @@ def poses_run(n: int, direction: int) -> list[Pose]:
     return poses
 
 
+WAVING_BUBBLE = Bubble(lines=("¡Hola,", "compañero!"), box=(92, 3, 190, 48), tail=(88, 60))
+
+
 def poses_waving(_: int) -> list[Pose]:
-    return [Pose(angle=a, dy=d) for a, d in ((0, 0), (14, -4), (0, 0), (-14, -4))]
+    """Se mece saludando, corrido a la izquierda para dejar sitio al bocadillo."""
+    return [Pose(angle=a, dy=d, dx=-16) for a, d in ((0, 0), (14, -4), (0, 0), (-14, -4))]
 
 
 def poses_jumping(_: int) -> list[Pose]:
@@ -242,6 +247,8 @@ def build(logo: Path, out_dir: Path) -> dict:
         report[state] = []
         for col, pose in enumerate(poses):
             cell, bbox, clipped = render_cell(sprite, pose)
+            if state == "waving":
+                cell = clear_hidden_rgb(draw_bubble(cell, WAVING_BUBBLE))
             cell.save(frame_dir / f"{col:02d}.png")
             atlas.alpha_composite(cell, (col * CELL_W, row * CELL_H))
             report[state].append({"frame": col, "bbox": bbox, "recortado": clipped})

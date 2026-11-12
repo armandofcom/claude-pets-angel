@@ -23,6 +23,7 @@
 | | **Ángel Gaitán** | **Guante Verde** |
 | --- | :---: | :---: |
 | Reposo | ![Ángel con los brazos cruzados, respira y se balancea](preview/angel-gaitan/idle.gif) | ![El guante se mece](preview/guante-verde/idle.gif) |
+| Saludo | ![Ángel saluda: ¡Hola, compañero!](preview/angel-gaitan/waving.gif) | ![El guante saluda: ¡Hola, compañero!](preview/guante-verde/waving.gif) |
 | La arrastras | ![Ángel conduce su coche rojo](preview/angel-gaitan/running-right.gif) | ![El guante da saltitos](preview/guante-verde/running-right.gif) |
 | Todo OK | ![Ángel hace la seña de OK y levanta los pulgares](preview/angel-gaitan/jumping.gif) | ![El guante salta](preview/guante-verde/jumping.gif) |
 | Revisando | ![Ángel señala con su puntero de guante verde](preview/angel-gaitan/review.gif) | ![El guante se inclina](preview/guante-verde/review.gif) |
@@ -77,7 +78,7 @@ foreach ($dest in "$env:USERPROFILE\.petdex\pets", "$env:USERPROFILE\.codex\pets
 | --- | --- | --- | --- |
 | `idle` | Sin actividad | Brazos cruzados: respira, parpadea y se balancea un poco | Se mece suavemente |
 | `running-right` / `running-left` | La arrastras | Conduce su coche rojo clásico y saluda por la ventanilla | Da saltitos inclinado |
-| `waving` | Saludo o aviso | Saluda con el guante | Se mece |
+| `waving` | Saludo o aviso | Saluda con el guante: «¡Hola, compañero!» | Se mece: «¡Hola, compañero!» |
 | `jumping` | Tarea terminada bien | «Todo OK»: seña de OK con guiño, doble pulgar arriba y saltito | Salta |
 | `failed` | Algo falló | Se lleva la mano a la cara | Gira a pulgar abajo y pierde color |
 | `waiting` | El agente espera tu permiso | Levanta la mano bien alta: «¡aquí!» | Da toquecitos hacia delante |

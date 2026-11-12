@@ -19,6 +19,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
+from bocadillo import Bubble, draw_bubble
 from PIL import Image, ImageDraw
 from scipy import ndimage
 
@@ -62,6 +63,12 @@ ROW_SOURCE: dict[str, str] = {
 
 # Filas que no son una persona de pie (el coche): se escalan para caber en la celda.
 ROW_FIT: dict[str, tuple[int, int]] = {"running-right": (CELL_W - 8, 150)}
+
+# Saludo con bocadillo: el personaje se corre a la izquierda y el globo va junto a su cabeza.
+ROW_DX: dict[str, int] = {"waving": -26}
+BUBBLES: dict[str, Bubble] = {
+    "waving": Bubble(lines=("¡Hola,", "compañero!"), box=(92, 3, 190, 50), tail=(82, 46)),
+}
 
 # Reposo: (pose de la tira, desplazamiento x en px, espejo). Petdex repite esta fila
 # en bucle cada ~1,1 s, así que el movimiento es un balanceo suave de pocos píxeles
@@ -249,9 +256,12 @@ def build(tiras: Path, out: Path, measure: bool) -> dict:
                 print(state, "escala=%.4f" % scale, "alturas=", [p.height for p in poses],
                       "anchos=", [p.rgba.width for p in poses])
             row_cells, report[state] = [], []
-            plan = IDLE_PATH if state == "idle" else tuple((i, 0, False) for i in range(frames))
+            base_dx = ROW_DX.get(state, 0)
+            plan = IDLE_PATH if state == "idle" else tuple((i, base_dx, False) for i in range(frames))
             for i, (src, dx, flip) in enumerate(plan):
                 cell, bbox, clipped = place(poses[src], scale, ground, dx, flip)
+                if state in BUBBLES:
+                    cell = clear_hidden_rgb(draw_bubble(cell, BUBBLES[state]))
                 row_cells.append(cell)
                 report[state].append({"frame": i, "bbox": bbox, "recortado": clipped})
         cells[state] = row_cells
