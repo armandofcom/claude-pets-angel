@@ -1,68 +1,149 @@
-# Mascotas de Ángel Gaitán
+<p align="center">
+  <img src="preview/banner.png" alt="El avatar de Ángel Gaitán y el Guante Verde, las dos mascotas de este repo" width="100%">
+</p>
 
-Dos mascotas animadas de escritorio para [Petdex Desktop](https://petdex.dev), Codex y
-[OpenPets](https://github.com/OpenPetsHQ/openpets). Reaccionan a lo que hace Claude Code.
-Instala una o las dos y elige cuál ver en Petdex.
+<h1 align="center">Mascotas de Ángel Gaitán</h1>
 
-| Guante Verde | Ángel Gaitán |
-| --- | --- |
-| ![Guante Verde](preview/guante-verde/idle.gif) | ![Ángel Gaitán](preview/angel-gaitan/idle.gif) |
-| El logo del guante. Salta con el pulgar arriba y gira a pulgar abajo si algo falla. | Avatar de Ángel con sus guantes verdes. Saluda, salta con el pulgar arriba y se lleva la mano a la cara si algo falla. |
+<p align="center">
+  Dos compañeros animados de escritorio que reaccionan a lo que hace tu agente de código.<br>
+  Para <a href="https://petdex.dev">Petdex Desktop</a>, Codex y <a href="https://github.com/OpenPetsHQ/openpets">OpenPets</a>.
+</p>
+
+<p align="center">
+  <img alt="Formato Codex pet 8x9" src="https://img.shields.io/badge/formato-Codex%20pet%208x9-5266ea?style=flat-square">
+  <img alt="2 mascotas" src="https://img.shields.io/badge/mascotas-2-7CE03A?style=flat-square">
+  <img alt="Código MIT" src="https://img.shields.io/badge/c%C3%B3digo-MIT-111111?style=flat-square">
+  <img alt="Arte con todos los derechos reservados" src="https://img.shields.io/badge/arte-derechos%20reservados-555555?style=flat-square">
+</p>
+
+<p align="center"><a href="#english">English version below</a></p>
+
+## Las mascotas
+
+| | **Ángel Gaitán** | **Guante Verde** |
+| --- | :---: | :---: |
+| Reposo | ![Ángel en reposo](preview/angel-gaitan/idle.gif) | ![Guante en reposo](preview/guante-verde/idle.gif) |
+| Tarea bien hecha | ![Ángel salta con el pulgar arriba](preview/angel-gaitan/jumping.gif) | ![El guante salta](preview/guante-verde/jumping.gif) |
+| Algo falló | ![Ángel se lleva la mano a la cara](preview/angel-gaitan/failed.gif) | ![El guante gira a pulgar abajo](preview/guante-verde/failed.gif) |
+| Trabajando | ![Ángel se ajusta los guantes](preview/angel-gaitan/running.gif) | ![El guante vibra](preview/guante-verde/running.gif) |
+
+- **Ángel Gaitán:** el mecánico de TikTok en versión ilustrada, con sus inseparables guantes verdes.
+- **Guante Verde:** el logo del guante, convertido en pegatina viva.
 
 ## Instalar
 
-```sh
-gh repo clone armandofcom/claude-pets-angel
-cd claude-pets-angel
-./install.sh                  # las dos
-./install.sh angel-gaitan     # solo el avatar
-./install.sh guante-verde     # solo el guante
-```
-
-Después:
-
-1. Descarga [Petdex Desktop](https://petdex.dev/download) y ábrelo.
-2. Pon el ratón sobre la mascota y pulsa <kbd>Cmd</kbd>+<kbd>,</kbd>.
-3. En **Pets** elige **Guante Verde** o **Ángel Gaitán**.
-4. En **Agents** conecta **Claude Code**.
-
-Para quitarlas: `./install.sh --desinstalar` (todas) o `./install.sh --desinstalar angel-gaitan`.
-
-### Con Claude Code
+### Con Claude Code (lo más fácil)
 
 Abre Claude Code en cualquier carpeta y pídele:
 
 > Instala la mascota de https://github.com/armandofcom/claude-pets-angel siguiendo su CLAUDE.md
 
-Claude clonará el repo, ejecutará `install.sh` y te dirá el paso final en Petdex Desktop.
+### A mano (macOS y Linux)
 
-## Animaciones
+```sh
+git clone https://github.com/armandofcom/claude-pets-angel.git
+cd claude-pets-angel
+./install.sh                # las dos
+./install.sh angel-gaitan   # solo Ángel
+./install.sh guante-verde   # solo el guante
+```
 
-| Estado | Cuándo sale | Guante Verde | Ángel Gaitán |
+Las copia en `~/.petdex/pets/` (Petdex Desktop) y `~/.codex/pets/` (Codex y OpenPets).
+Para quitarlas: `./install.sh --desinstalar` o `./install.sh --desinstalar angel-gaitan`.
+
+### A mano (Windows, PowerShell)
+
+```powershell
+git clone https://github.com/armandofcom/claude-pets-angel.git
+cd claude-pets-angel
+foreach ($dest in "$env:USERPROFILE\.petdex\pets", "$env:USERPROFILE\.codex\pets") {
+  New-Item -ItemType Directory -Force $dest | Out-Null
+  Copy-Item -Recurse -Force pets\* $dest
+}
+```
+
+### Verla en pantalla
+
+1. Descarga [Petdex Desktop](https://petdex.dev/download) y ábrelo.
+2. Pon el ratón sobre la mascota y pulsa <kbd>Cmd</kbd>+<kbd>,</kbd> (<kbd>Ctrl</kbd>+<kbd>,</kbd> en Windows y Linux).
+3. En **Pets** elige **Ángel Gaitán** o **Guante Verde**.
+4. En **Agents** conecta **Claude Code** (o Codex, Cursor…).
+
+## Cómo reacciona
+
+| Estado | Cuándo sale | Ángel Gaitán | Guante Verde |
 | --- | --- | --- | --- |
-| idle | Sin actividad | Respira y se balancea | Brazos cruzados, respira y parpadea |
-| running-right / left | Arrastras la mascota | Saltitos inclinado | Trota hacia ese lado |
-| waving | Saludo o aviso | Se mece | Saluda con el guante |
-| jumping | Tarea terminada bien | Salta | Salta con el pulgar arriba |
-| failed | Algo falló | Gira a pulgar abajo y pierde color | Se lleva la mano a la cara |
-| waiting | Claude espera tu permiso | Toquecitos hacia delante | Mano abierta, «¿te toca?» |
-| running | Claude ejecuta o edita | Vibra con energía | Se ajusta los guantes y flexiona los dedos |
-| review | Claude piensa o revisa | Se inclina despacio | Mano en la barbilla |
+| `idle` | Sin actividad | Brazos cruzados, respira y parpadea | Respira y se balancea |
+| `running-right` / `running-left` | La arrastras | Trota hacia ese lado | Da saltitos inclinado |
+| `waving` | Saludo o aviso | Saluda con el guante | Se mece |
+| `jumping` | Tarea terminada bien | Salta con el pulgar arriba | Salta |
+| `failed` | Algo falló | Se lleva la mano a la cara | Gira a pulgar abajo y pierde color |
+| `waiting` | El agente espera tu permiso | Mano abierta: «¿te toca?» | Da toquecitos hacia delante |
+| `running` | El agente ejecuta o edita | Se ajusta los guantes | Vibra con energía |
+| `review` | El agente piensa o revisa | Mano en la barbilla | Se inclina despacio |
 
-Hojas completas: [guante](preview/guante-verde/contact-sheet.png) · [Ángel](preview/angel-gaitan/contact-sheet.png).
+Hojas completas: [Ángel](preview/angel-gaitan/contact-sheet.png) · [Guante](preview/guante-verde/contact-sheet.png).
 
-## Formato y cómo se hicieron
+## Cómo se hicieron
 
-- Cada mascota es `pets/<id>/pet.json` + `pets/<id>/spritesheet.webp`: atlas 8x9 de celdas 192x208
-  (1536x1872 px), el formato de Codex que también aceptan Petdex y OpenPets.
-- Las dos pasan `validate_atlas.py` de la skill `hatch-pet` de Codex sin errores ni avisos.
-- **Guante Verde:** `tools/generar_atlas.py` anima el logo real (`tools/guante-verde-logo.webp`).
-- **Ángel Gaitán:** ilustración generada con IA en Higgsfield (GPT Image 2) a partir de fotos públicas
-  de su web e Instagram. Las tiras originales están en `fuentes/angel-gaitan/` y
-  `tools/procesar_tiras.py` las recorta, iguala tamaño y suelo, y monta el atlas.
+- **Formato:** cada mascota es `pet.json` + `spritesheet.webp`, un atlas 8x9 de celdas de 192x208
+  (1536x1872 px). Es el formato de las mascotas de Codex que también leen Petdex y OpenPets.
+- **Guante Verde:** sin IA. [`tools/generar_atlas.py`](tools/generar_atlas.py) anima el logo real con
+  rebotes, inclinaciones, salto con estiramiento y giro a pulgar abajo.
+- **Ángel Gaitán:** ilustración generada con GPT Image 2 (en Higgsfield) a partir de fotos públicas,
+  una tira por animación sobre fondo magenta ([`fuentes/angel-gaitan/`](fuentes/angel-gaitan/)).
+  [`tools/procesar_tiras.py`](tools/procesar_tiras.py) quita el fondo, separa las poses e iguala
+  tamaño y suelo antes de montar el atlas.
+- **Calidad:** los dos atlas pasan el validador `validate_atlas.py` de la skill `hatch-pet` de Codex
+  sin errores ni avisos, y ningún fotograma se sale de su celda.
 
-## Derechos
+Para regenerar los atlas:
 
-El guante verde es el logo de Ángel Gaitán y el avatar reproduce su imagen. No se pueden
-redistribuir ni subir a galerías públicas (por ejemplo `petdex submit`) sin su permiso.
-Los scripts de `tools/` se pueden reutilizar libremente.
+```sh
+python3 -m venv .venv && .venv/bin/pip install pillow numpy scipy
+.venv/bin/python tools/generar_atlas.py --logo tools/guante-verde-logo.webp --salida salida-guante
+.venv/bin/python tools/procesar_tiras.py --tiras fuentes/angel-gaitan --salida salida-angel
+```
+
+## Estructura
+
+```text
+pets/
+  angel-gaitan/   pet.json + spritesheet.webp
+  guante-verde/   pet.json + spritesheet.webp
+preview/          banner, GIF y hojas de contactos
+fuentes/          tiras originales del avatar
+tools/            scripts que generan los atlas
+install.sh        instalador (macOS y Linux)
+CLAUDE.md         instrucciones para que Claude Code las instale
+```
+
+## Licencia y derechos
+
+- **Código** (`tools/`, `install.sh`): [MIT](LICENSE).
+- **Arte** (`pets/`, `preview/`, `fuentes/` y el logo): el guante verde es la marca de Ángel Gaitán y el
+  avatar reproduce su imagen. Todos los derechos reservados. Puedes instalarlas y usarlas, pero no
+  modificarlas, redistribuirlas ni usarlas en otros proyectos sin permiso.
+- El formato de mascota y la app son de [Petdex](https://github.com/crafter-station/petdex) y
+  [OpenPets](https://github.com/OpenPetsHQ/openpets).
+
+---
+
+## English
+
+Two animated desktop companions based on Spanish mechanic and creator **Ángel Gaitán**: an illustrated
+avatar wearing his signature green gloves, and his **green glove** logo brought to life. They react to
+your coding agent (thinking, working, waiting for approval, success, failure) in
+[Petdex Desktop](https://petdex.dev), Codex and [OpenPets](https://github.com/OpenPetsHQ/openpets).
+
+```sh
+git clone https://github.com/armandofcom/claude-pets-angel.git
+cd claude-pets-angel
+./install.sh                # both pets (or: ./install.sh angel-gaitan | guante-verde)
+```
+
+Then open Petdex Desktop, press <kbd>Cmd</kbd>+<kbd>,</kbd> over the pet, pick it under **Pets** and connect
+your agent under **Agents**. Or just ask Claude Code: *"Install the pet from
+https://github.com/armandofcom/claude-pets-angel following its CLAUDE.md"*.
+
+Code is MIT. Artwork (glove logo and avatar) belongs to Ángel Gaitán, all rights reserved.

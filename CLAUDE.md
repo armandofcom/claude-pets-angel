@@ -10,7 +10,8 @@ celdas 192x208, 1536x1872 px):
 ## Cuando el usuario pida instalar la mascota
 
 1. Si no estás dentro del repo, clónalo:
-   `gh repo clone armandofcom/claude-pets-angel && cd claude-pets-angel`
+   `git clone https://github.com/armandofcom/claude-pets-angel.git && cd claude-pets-angel`
+   En Windows no hay `install.sh`: usa el bloque de PowerShell de la sección «A mano (Windows)» del README.
 2. Instala:
    - Si nombra una (el guante o Ángel), solo esa: `./install.sh guante-verde` o `./install.sh angel-gaitan`.
    - Si no dice cuál, las dos: `./install.sh`. Luego podrá cambiar entre ellas en Petdex sin reinstalar.
