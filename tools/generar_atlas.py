@@ -54,15 +54,26 @@ class Pose:
     bright: float = 1.0      # brillo (1 = original)
 
 
+IDLE_PATH: tuple[tuple[int, int], ...] = (
+    (-36, 1), (-12, 1), (12, 1), (36, -1), (12, -1), (-12, -1),
+)  # (desplazamiento x, dirección): va a la derecha, se gira y vuelve
+
+
 def poses_idle(n: int) -> list[Pose]:
-    return [
-        Pose(
-            sx=1 - 0.015 * math.sin(2 * math.pi * i / n),
-            sy=1 + 0.03 * math.sin(2 * math.pi * i / n),
-            angle=1.5 * math.cos(2 * math.pi * i / n),
+    """Paseo de ida y vuelta a saltitos, inclinado hacia donde va."""
+    poses = []
+    for i, (dx, direction) in enumerate(IDLE_PATH[:n]):
+        landing = i in (0, 3)  # apoya en los extremos antes de seguir o girarse
+        poses.append(
+            Pose(
+                sx=1.05 if landing else 0.98,
+                sy=0.94 if landing else 1.03,
+                angle=-7 * direction,
+                dx=dx,
+                dy=0 if landing else -10,
+            )
         )
-        for i in range(n)
-    ]
+    return poses
 
 
 def poses_run(n: int, direction: int) -> list[Pose]:

@@ -45,9 +45,30 @@ ROW_SPECS: tuple[tuple[str, int, int, str], ...] = (
 # Cómo estimar la altura "de pie" de cada fila: (frame de referencia o None=máximo, factor).
 # En el salto ningún frame está de pie: se usa el frame 1 (impulso) corregido.
 ROW_REF: dict[str, tuple[int | None, float]] = {
-    "jumping": (1, 0.93),   # el impulso mide ~93 % del alto de pie
+    "jumping": (0, 1.0),     # frame 0 de pie; luego gestos de OK y saltito
     "waving": (None, 1.09),  # la mano levantada sobresale ~9 % por encima de la cabeza
+    "waiting": (0, 1.0),     # frame 0 de pie; luego levanta el brazo por encima de la cabeza
+    "review": (0, 1.0),      # frame 0 de pie; luego alza el puntero
 }
+
+# Tira de origen de cada fila (sin extensión). Por defecto "tira-<estado>".
+ROW_SOURCE: dict[str, str] = {
+    "idle": "tira-pasear",           # paseo de ida y vuelta (ver WALK_PATH)
+    "running-right": "tira-coche",   # va en su coche rojo
+    "jumping": "tira-ok",            # «todo OK»: seña de OK, pulgares arriba y saltito
+    "waiting": "tira-levantar-mano",
+    "review": "tira-puntero",        # señala con el puntero del guante verde
+}
+
+# Filas que no son una persona de pie (el coche): se escalan para caber en la celda.
+ROW_FIT: dict[str, tuple[int, int]] = {"running-right": (CELL_W - 8, 150)}
+
+# Paseo en reposo: (pose de la tira, desplazamiento x en px, mirando a la izquierda).
+# Va a la derecha en 3 pasos, se gira y vuelve en 2; el bucle cierra en el frame 0.
+WALK_PATH: tuple[tuple[int, int, bool], ...] = (
+    (0, -36, False), (1, -12, False), (2, 12, False),
+    (3, 36, True), (4, 12, True), (5, -12, True),
+)
 
 
 @dataclass(frozen=True)
@@ -152,14 +173,18 @@ def extract_poses(path: Path, n: int) -> list[Pose]:
 
 def tira_path(tiras: Path, state: str) -> Path | None:
     """Ruta de la tira de un estado, en .png o .webp; None si no existe."""
+    stem = ROW_SOURCE.get(state, f"tira-{state}")
     for ext in (".png", ".webp"):
-        path = tiras / f"tira-{state}{ext}"
+        path = tiras / f"{stem}{ext}"
         if path.is_file():
             return path
     return None
 
 
 def row_scale(state: str, poses: list[Pose]) -> float:
+    if state in ROW_FIT:
+        max_w, max_h = ROW_FIT[state]
+        return min(max_w / max(p.rgba.width for p in poses), max_h / max(p.height for p in poses))
     idx, factor = ROW_REF.get(state, (None, 1.0))
     ref = poses[idx].height if idx is not None else max(p.height for p in poses)
     return TARGET_H / (ref / factor)
@@ -184,13 +209,17 @@ def clear_hidden_rgb(img: Image.Image) -> Image.Image:
     return out
 
 
-def place(pose: Pose, scale: float, ground: int) -> tuple[Image.Image, list[int], bool]:
+def place(
+    pose: Pose, scale: float, ground: int, dx: int = 0, flip: bool = False
+) -> tuple[Image.Image, list[int], bool]:
     w, h = max(1, round(pose.rgba.width * scale)), max(1, round(pose.rgba.height * scale))
     art = pose.rgba.convert("RGBa").resize((w, h), Image.Resampling.LANCZOS).convert("RGBA")
+    if flip:
+        art = art.transpose(Image.Transpose.FLIP_LEFT_RIGHT)
     lift = round((ground - pose.bottom) * scale)
     y = BASELINE - lift - h
     y = max(MARGIN, y)
-    x = round(CELL_W / 2 - torso_anchor_x(art))
+    x = round(CELL_W / 2 + dx - torso_anchor_x(art))
     x = min(max(x, MARGIN), CELL_W - MARGIN - w) if w <= CELL_W - 2 * MARGIN else x
     cell = Image.new("RGBA", (CELL_W, CELL_H), (0, 0, 0, 0))
     cell.paste(art, (x, y), art)
@@ -219,8 +248,9 @@ def build(tiras: Path, out: Path, measure: bool) -> dict:
                 print(state, "escala=%.4f" % scale, "alturas=", [p.height for p in poses],
                       "anchos=", [p.rgba.width for p in poses])
             row_cells, report[state] = [], []
-            for i, pose in enumerate(poses):
-                cell, bbox, clipped = place(pose, scale, ground)
+            plan = WALK_PATH if state == "idle" else tuple((i, 0, False) for i in range(frames))
+            for i, (src, dx, flip) in enumerate(plan):
+                cell, bbox, clipped = place(poses[src], scale, ground, dx, flip)
                 row_cells.append(cell)
                 report[state].append({"frame": i, "bbox": bbox, "recortado": clipped})
         cells[state] = row_cells

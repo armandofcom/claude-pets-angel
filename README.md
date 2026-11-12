@@ -22,12 +22,14 @@
 
 | | **Ángel Gaitán** | **Guante Verde** |
 | --- | :---: | :---: |
-| Reposo | ![Ángel en reposo](preview/angel-gaitan/idle.gif) | ![Guante en reposo](preview/guante-verde/idle.gif) |
-| Tarea bien hecha | ![Ángel salta con el pulgar arriba](preview/angel-gaitan/jumping.gif) | ![El guante salta](preview/guante-verde/jumping.gif) |
+| Reposo: pasea | ![Ángel pasea de un lado a otro](preview/angel-gaitan/idle.gif) | ![El guante pasea a saltitos](preview/guante-verde/idle.gif) |
+| La arrastras | ![Ángel conduce su coche rojo](preview/angel-gaitan/running-right.gif) | ![El guante da saltitos](preview/guante-verde/running-right.gif) |
+| Todo OK | ![Ángel hace la seña de OK y levanta los pulgares](preview/angel-gaitan/jumping.gif) | ![El guante salta](preview/guante-verde/jumping.gif) |
+| Revisando | ![Ángel señala con su puntero de guante verde](preview/angel-gaitan/review.gif) | ![El guante se inclina](preview/guante-verde/review.gif) |
 | Algo falló | ![Ángel se lleva la mano a la cara](preview/angel-gaitan/failed.gif) | ![El guante gira a pulgar abajo](preview/guante-verde/failed.gif) |
-| Trabajando | ![Ángel se ajusta los guantes](preview/angel-gaitan/running.gif) | ![El guante vibra](preview/guante-verde/running.gif) |
 
-- **Ángel Gaitán:** el mecánico de TikTok en versión ilustrada, con sus inseparables guantes verdes.
+- **Ángel Gaitán:** el mecánico de TikTok en versión ilustrada, con sus inseparables guantes verdes,
+  su coche rojo clásico y un puntero con un guante en la punta.
 - **Guante Verde:** el logo del guante, convertido en pegatina viva.
 
 ## Instalar
@@ -73,14 +75,14 @@ foreach ($dest in "$env:USERPROFILE\.petdex\pets", "$env:USERPROFILE\.codex\pets
 
 | Estado | Cuándo sale | Ángel Gaitán | Guante Verde |
 | --- | --- | --- | --- |
-| `idle` | Sin actividad | Brazos cruzados, respira y parpadea | Respira y se balancea |
-| `running-right` / `running-left` | La arrastras | Trota hacia ese lado | Da saltitos inclinado |
+| `idle` | Sin actividad | Pasea de un lado a otro y se da la vuelta | Pasea a saltitos de lado a lado |
+| `running-right` / `running-left` | La arrastras | Conduce su coche rojo clásico y saluda por la ventanilla | Da saltitos inclinado |
 | `waving` | Saludo o aviso | Saluda con el guante | Se mece |
-| `jumping` | Tarea terminada bien | Salta con el pulgar arriba | Salta |
+| `jumping` | Tarea terminada bien | «Todo OK»: seña de OK con guiño, doble pulgar arriba y saltito | Salta |
 | `failed` | Algo falló | Se lleva la mano a la cara | Gira a pulgar abajo y pierde color |
-| `waiting` | El agente espera tu permiso | Mano abierta: «¿te toca?» | Da toquecitos hacia delante |
-| `running` | El agente ejecuta o edita | Se ajusta los guantes | Vibra con energía |
-| `review` | El agente piensa o revisa | Mano en la barbilla | Se inclina despacio |
+| `waiting` | El agente espera tu permiso | Levanta la mano bien alta: «¡aquí!» | Da toquecitos hacia delante |
+| `running` | El agente ejecuta o edita | Se ajusta los guantes y flexiona los dedos | Vibra con energía |
+| `review` | El agente piensa o revisa | Señala con un puntero con un guante verde en la punta | Se inclina despacio |
 
 Hojas completas: [Ángel](preview/angel-gaitan/contact-sheet.png) · [Guante](preview/guante-verde/contact-sheet.png).
 
