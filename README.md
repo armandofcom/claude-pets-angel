@@ -22,7 +22,7 @@
 
 | | **Ángel Gaitán** | **Guante Verde** |
 | --- | :---: | :---: |
-| Reposo: pasea | ![Ángel pasea de un lado a otro](preview/angel-gaitan/idle.gif) | ![El guante pasea a saltitos](preview/guante-verde/idle.gif) |
+| Reposo | ![Ángel con los brazos cruzados, respira y se balancea](preview/angel-gaitan/idle.gif) | ![El guante se mece](preview/guante-verde/idle.gif) |
 | La arrastras | ![Ángel conduce su coche rojo](preview/angel-gaitan/running-right.gif) | ![El guante da saltitos](preview/guante-verde/running-right.gif) |
 | Todo OK | ![Ángel hace la seña de OK y levanta los pulgares](preview/angel-gaitan/jumping.gif) | ![El guante salta](preview/guante-verde/jumping.gif) |
 | Revisando | ![Ángel señala con su puntero de guante verde](preview/angel-gaitan/review.gif) | ![El guante se inclina](preview/guante-verde/review.gif) |
@@ -75,7 +75,7 @@ foreach ($dest in "$env:USERPROFILE\.petdex\pets", "$env:USERPROFILE\.codex\pets
 
 | Estado | Cuándo sale | Ángel Gaitán | Guante Verde |
 | --- | --- | --- | --- |
-| `idle` | Sin actividad | Pasea de un lado a otro y se da la vuelta | Pasea a saltitos de lado a lado |
+| `idle` | Sin actividad | Brazos cruzados: respira, parpadea y se balancea un poco | Se mece suavemente |
 | `running-right` / `running-left` | La arrastras | Conduce su coche rojo clásico y saluda por la ventanilla | Da saltitos inclinado |
 | `waving` | Saludo o aviso | Saluda con el guante | Se mece |
 | `jumping` | Tarea terminada bien | «Todo OK»: seña de OK con guiño, doble pulgar arriba y saltito | Salta |

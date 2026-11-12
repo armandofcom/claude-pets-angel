@@ -54,23 +54,20 @@ class Pose:
     bright: float = 1.0      # brillo (1 = original)
 
 
-IDLE_PATH: tuple[tuple[int, int], ...] = (
-    (-36, 1), (-12, 1), (12, 1), (36, -1), (12, -1), (-12, -1),
-)  # (desplazamiento x, dirección): va a la derecha, se gira y vuelve
-
-
 def poses_idle(n: int) -> list[Pose]:
-    """Paseo de ida y vuelta a saltitos, inclinado hacia donde va."""
+    """Vaivén suave: respira, se mece unos grados y se desliza unos píxeles.
+
+    Petdex repite esta fila cada ~1,1 s, así que el movimiento es pequeño y vuelve a su sitio.
+    """
     poses = []
-    for i, (dx, direction) in enumerate(IDLE_PATH[:n]):
-        landing = i in (0, 3)  # apoya en los extremos antes de seguir o girarse
+    for i in range(n):
+        t = 2 * math.pi * i / n
         poses.append(
             Pose(
-                sx=1.05 if landing else 0.98,
-                sy=0.94 if landing else 1.03,
-                angle=-7 * direction,
-                dx=dx,
-                dy=0 if landing else -10,
+                sx=1 - 0.012 * math.sin(t),
+                sy=1 + 0.025 * math.sin(t),
+                angle=3 * math.sin(t),
+                dx=3 * math.sin(t),
             )
         )
     return poses

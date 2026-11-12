@@ -53,7 +53,7 @@ ROW_REF: dict[str, tuple[int | None, float]] = {
 
 # Tira de origen de cada fila (sin extensión). Por defecto "tira-<estado>".
 ROW_SOURCE: dict[str, str] = {
-    "idle": "tira-pasear",           # paseo de ida y vuelta (ver WALK_PATH)
+    "idle": "tira-idle",             # brazos cruzados, respira y parpadea (ver IDLE_PATH)
     "running-right": "tira-coche",   # va en su coche rojo
     "jumping": "tira-ok",            # «todo OK»: seña de OK, pulgares arriba y saltito
     "waiting": "tira-levantar-mano",
@@ -63,11 +63,12 @@ ROW_SOURCE: dict[str, str] = {
 # Filas que no son una persona de pie (el coche): se escalan para caber en la celda.
 ROW_FIT: dict[str, tuple[int, int]] = {"running-right": (CELL_W - 8, 150)}
 
-# Paseo en reposo: (pose de la tira, desplazamiento x en px, mirando a la izquierda).
-# Va a la derecha en 3 pasos, se gira y vuelve en 2; el bucle cierra en el frame 0.
-WALK_PATH: tuple[tuple[int, int, bool], ...] = (
-    (0, -36, False), (1, -12, False), (2, 12, False),
-    (3, 36, True), (4, 12, True), (5, -12, True),
+# Reposo: (pose de la tira, desplazamiento x en px, espejo). Petdex repite esta fila
+# en bucle cada ~1,1 s, así que el movimiento es un balanceo suave de pocos píxeles
+# que vuelve a su sitio; la pose 3 de la tira es el parpadeo.
+IDLE_PATH: tuple[tuple[int, int, bool], ...] = (
+    (0, 0, False), (1, 1, False), (2, 3, False),
+    (3, 4, False), (4, 3, False), (5, 1, False),
 )
 
 
@@ -248,7 +249,7 @@ def build(tiras: Path, out: Path, measure: bool) -> dict:
                 print(state, "escala=%.4f" % scale, "alturas=", [p.height for p in poses],
                       "anchos=", [p.rgba.width for p in poses])
             row_cells, report[state] = [], []
-            plan = WALK_PATH if state == "idle" else tuple((i, 0, False) for i in range(frames))
+            plan = IDLE_PATH if state == "idle" else tuple((i, 0, False) for i in range(frames))
             for i, (src, dx, flip) in enumerate(plan):
                 cell, bbox, clipped = place(poses[src], scale, ground, dx, flip)
                 row_cells.append(cell)
